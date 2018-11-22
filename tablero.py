@@ -1,27 +1,42 @@
 import numpy as np
 
 class Tablero:
+    #Constructor
     def __init__(self, row_count, column_count):
         self.fila = row_count
         self.columna = column_count
 
+    #creacion de tablero
     def crear_tablero(self):
         self.board = np.zeros((self.fila, self.columna))
 
+    #imprimir tablero
     def print_tablero(self):
         print(np.flip(self.board,0))
 
+    #verifica si la columna esta llena
     def columna_valida(self,columna):
         return self.board[5][columna]==0
 
+    #coloca la pieza en la columna
     def colocar_pieza(self, fila, columna, pieza):
         self.board[fila][columna]=pieza
 
+    #busca el espacio mas abajo de la columna que este desocupada
     def get_fila_abierta(self,columna):
         for row in range (self.fila):
             if self.board[row][columna]==0:
                 return row
-            
+
+    #por si ocupa obtener el talero
+    def get_tablero(self):
+        return self.tablero
+
+    #por si ocupa reemplazar tablero
+    def set_tablero(self, tablero):
+        self.tablero = tablero
+
+#ejemplo           
 def jugar():
     tablero = Tablero(6,7)
     tablero.crear_tablero()
