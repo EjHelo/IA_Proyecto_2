@@ -5,6 +5,7 @@ class Tablero:
     def __init__(self, row_count, column_count):
         self.fila = row_count
         self.columna = column_count
+        self.crear_tablero()
 
     #creacion de tablero
     def crear_tablero(self):
@@ -23,22 +24,104 @@ class Tablero:
         self.board[fila][columna]=pieza
 
     #busca el espacio mas abajo de la columna que este desocupada
+        
     def get_fila_abierta(self,columna):
-        for row in range (self.fila):
-            if self.board[row][columna]==0:
-                return row
+        for fila in range (self.fila):
+            if self.board[fila][columna]==0:
+                return fila
 
-    def get_lista_secuencia(self,pieza):
-        lista=[]
-        for row in range (self.fila-1):
-            for c in range (self.columna-1):
-                if self.board[row][c] == 0:
-                    if(self.revisar_secuencia(row,c,pieza)):
-                        print("estoy en: \n")
-                        print(row)
-                        print(c)
+    def get_lista_columna(self, pieza):
+        lista = []
+        for fila in range (self.fila):
+            for c in range (self.columna):
+                if self.board[fila][c]==0:
+                    if self.revisar_columna(fila,c,pieza):
                         lista+=[c]
         return lista
+
+    def revisar_columna(self,fila,columna,pieza):
+        if fila != 0:
+            if self.board[fila-1][columna]==pieza:
+                return True
+
+    def get_lista_fila(self, pieza):
+        lista = []
+        for fila in range (self.fila):
+            for c in range (self.columna):
+                if self.board[fila][c]==0:
+                    if self.revisar_fila(fila,c,pieza):
+                        lista+=[c]
+        return lista
+
+    def revisar_fila(self,fila,columna,pieza):
+        if columna == 0:
+            if self.board[fila][columna+1]==pieza:
+                return True
+        elif columna ==6:
+            if self.board[fila][columna-1]==pieza:
+                return True
+        else:
+            if self.board[fila][columna+1]==pieza or self.board[fila][columna-1]==pieza:
+                return True
+    def get_lista_espacio(self,pieza):
+        lista=[]
+        for fila in range (self.fila-1):
+            for c in range (self.columna-1):
+                if self.board[fila][c]== pieza:
+                    if (self.revisar_espacio(fila,c,pieza))!=0:
+                        print("entre")
+                        lista+=[c+self.revisar_espacio(fila,c,pieza)]
+                    
+        return lista
+    def get_lista_secuencia(self,pieza):
+        lista=[]
+        for fila in range (self.fila-1):
+            for c in range (self.columna-1):
+                if self.board[fila][c] == 0:
+                    if(self.revisar_secuencia(fila,c,pieza)):
+                        lista+=[c]
+        return lista
+
+    def movimiento_gane(self,pieza):
+    # Gana horizontal
+        for col in range(self.columna-3):
+            for fila in range(self.fila):
+                if self.board[fila][col] == piece and self.board[fila][col+1] == piece and self.board[fila][col+2] == piece and self.board[fila][col+3] == piece :
+                    return True
+
+    # Gana vertical
+        for col in range(self.columna):
+            for fila in range(self.fila-3):
+                if self.board[fila][col] == piece and self.board[fila+1][col] == piece and self.board[fila+2][col] == piece and self.board[fila+3][col] == piece :
+                    return True
+
+    # Gana por diagonal
+        for col in range(self.columna-3):
+            for fila in range(self.fila-3):
+                if self.board[fila][col] == piece and self.board[fila+1][col+1] == piece and self.board[fila+2][col+2] == piece and self.board[fila+3][col+3] == piece :
+                    return True
+                
+            for fila in range(3, self.fila):
+                if self.board[fila][col] == piece and self.board[fila-1][col+1] == piece and self.board[fila-2][col+2] == piece and self.board[fila-3][col+3] == piece :
+                    return True
+    def revisar_espacio(self, fila, columna, pieza):
+        if columna == 0 or columna ==1:
+            if (self.get_fila_abierta(columna+1)==self.get_fila_abierta(columna+2)):
+                if(self.board[fila][columna+1]==0 and self.board[fila][columna+2]==0):
+                    return 2
+        elif columna == 5 or columna == 6:
+            if (self.get_fila_abierta(columna-1) == self.get_fila_abierta(columna-2)):
+                if(self.board[fila][columna-1]==0 and self.board[fila][columna-2]==0):
+                    return -2
+        else:
+            if (self.get_fila_abierta(columna+1)==self.get_fila_abierta(columna+2)):
+                if(self.board[fila][columna+1]==0 and self.board[fila][columna+2]==0):
+                    return 2
+            elif (self.get_fila_abierta(columna-1) == self.get_fila_abierta(columna-2)):
+                if(self.board[fila][columna-1]==0 and self.board[fila][columna-2]==0):
+                    return -2
+        return 0
+
 
     def revisar_secuencia(self,fila, columna, pieza):
         if fila==0:
@@ -95,5 +178,5 @@ def jugar():
                 jugador=1
         tablero.print_tablero()
         #tablero.revisar_punto(fila,column)
-        lista = tablero.get_lista_secuencia(1)
+        lista = tablero.get_lista_columna(1)
         print(lista)
