@@ -38,7 +38,7 @@ class Agente:
         else:
             oponente = 1
 
-        or col in range(columna):
+        for col in range(columna):
             temp_tablero = copy.copy(tablero)
             if temp_tablero.columna_valida(col):
                 # Simula jugada
