@@ -1,34 +1,48 @@
 import numpy as np
 
 class Tablero:
+    
     #Constructor
     def __init__(self, row_count, column_count):
         self.fila = row_count
         self.columna = column_count
         self.crear_tablero()
 
+
+    def get_columna(self):
+        return self.columna
+
+
+    def get_fila(self):
+        return self.fila
+
+    
     #creacion de tablero
     def crear_tablero(self):
         self.board = np.zeros((self.fila, self.columna))
+
 
     #imprimir tablero
     def print_tablero(self):
         print(np.flip(self.board,0))
 
+
     #verifica si la columna esta llena
     def columna_valida(self,columna):
         return self.board[5][columna]==0
+
 
     #coloca la pieza en la columna
     def colocar_pieza(self, fila, columna, pieza):
         self.board[fila][columna]=pieza
 
-    #busca el espacio mas abajo de la columna que este desocupada
-        
+
+    #busca el espacio mas abajo de la columna que este desocupada        
     def get_fila_abierta(self,columna):
         for fila in range (self.fila):
             if self.board[fila][columna]==0:
                 return fila
+
 
     def get_lista_columna(self, pieza):
         lista = []
@@ -39,10 +53,12 @@ class Tablero:
                         lista+=[c]
         return lista
 
+
     def revisar_columna(self,fila,columna,pieza):
         if fila != 0:
             if self.board[fila-1][columna]==pieza:
                 return True
+
 
     def get_lista_fila(self, pieza):
         lista = []
@@ -52,6 +68,7 @@ class Tablero:
                     if self.revisar_fila(fila,c,pieza):
                         lista+=[c]
         return lista
+
 
     def revisar_fila(self,fila,columna,pieza):
         if columna == 0:
@@ -63,6 +80,7 @@ class Tablero:
         else:
             if self.board[fila][columna+1]==pieza or self.board[fila][columna-1]==pieza:
                 return True
+
     def get_lista_espacio(self,pieza):
         lista=[]
         for fila in range (self.fila-1):
@@ -73,6 +91,7 @@ class Tablero:
                         lista+=[c+self.revisar_espacio(fila,c,pieza)]
                     
         return lista
+
     def get_lista_secuencia(self,pieza):
         lista=[]
         for fila in range (self.fila-1):
@@ -81,6 +100,7 @@ class Tablero:
                     if(self.revisar_secuencia(fila,c,pieza)):
                         lista+=[c]
         return lista
+
 
     def movimiento_gane(self,pieza):
     # Gana horizontal
@@ -104,6 +124,14 @@ class Tablero:
             for fila in range(3, self.fila):
                 if self.board[fila][col] == piece and self.board[fila-1][col+1] == piece and self.board[fila-2][col+2] == piece and self.board[fila-3][col+3] == piece :
                     return True
+        return False
+
+    #Verifica si el tablero está lleno
+    def tablero_lleno(self):
+        if not 0 in self.board:
+            return True
+        return False
+    
     def revisar_espacio(self, fila, columna, pieza):
         if columna == 0 or columna ==1:
             if (self.get_fila_abierta(columna+1)==self.get_fila_abierta(columna+2)):

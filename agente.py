@@ -16,6 +16,21 @@ class Agente:
         self.victorias = 0
         self.pieza = pieza
 
+    def ganar(self, tablero):
+        columna = tablero.get_columna()
+        
+        for col in range(columna):
+            temp_tablero = copy.copy(tablero)
+            if temp_tablero.columna_valida(col):
+                # Simula jugada
+                fila = temp_tablero.get_fila_abierta(columna)
+                temp_tablero.colocar_pieza(fila, col, self.pieza)
+                if temp_tablero.movimiento_gane(self.pieza):
+                    # Si tiene gane realiza la jugada de gane y retorna el tablero
+                    tablero.colocar_pieza(fila, col, self.pieza)
+                    return tablero      
+        
+
     def escoger_columnas(self, tablero, pieza):
         #buscar caracteristicas en tablero
         lista = []
