@@ -5,10 +5,11 @@ from Tablero import *
 class Minimax(object):
       
     board = None
+    vector = []
     
-    def __init__(self, board):
+    def __init__(self, board, vector):
         self.board = tablero.get_tablero() #Respaldo del tablero
-        #self.vector = vector
+        self.vector = vector
     
     #Función que retorna el número de columnaa del mejor movimiento       
     def mejor_movimiento(self, obj_tablero, jugador_actual):
@@ -25,8 +26,9 @@ class Minimax(object):
             jugador_oponente = 1
         
         movimientos_permitidos = {} # enum de todos los movimientos permitidos
-        for col in range(7):
+        for columna in range(len(self.vector)):
             # verifica si la columna tiene espacios disponibles
+            col = self.vector[columna]
             if tablero[5][col] == 0:
                 # Hace el movimiento en la columna para el jugador actual
                 temporal = self.mover(tablero, col, jugador_actual)
@@ -48,7 +50,8 @@ class Minimax(object):
     #Funcion que retorna el valor alpha buscado en el arbol de profundidad
     def busqueda(self, profundidad, tablero, jugador_actual):
         movimientos_permitidos = [] #Todos los movimientos permitidos del tablero
-        for col in range(7):
+        for columna in range(len(self.vector)):
+            col = self.vector[columna]
             if tablero[5][col] == 0:
                 temporal = self.mover(tablero, col, jugador_actual) #mueve en columna i
                 movimientos_permitidos.append(temporal)
@@ -107,8 +110,9 @@ class Minimax(object):
             
     def chequeo_consecutivos(self, tablero, jugador_actual, consecutivo):
         contador = 0
-        for i in range(6):
-            for j in range(7):
+        for i in range(6): 
+            for columna in range(len(self.vector)):
+                j = self.vector[columna]
                 if tablero[i][j] == jugador_actual:
                     # chequea si un consecutivo vertical empieza en (i, j)
                     contador += self.vertical_horizontal_consecutivo(i, j, tablero, consecutivo, "vertical")
@@ -128,7 +132,8 @@ class Minimax(object):
                 else:
                     break
         else:
-            for j in range(col, 7):
+            for columna in range(len(self.vector)):
+                j = self.vector[columna]
                 if tablero[row][j] == tablero[row][col]:
                     contador += 1
                 else:
@@ -176,33 +181,6 @@ class Minimax(object):
         return total
 
 
-tablero = Tablero(6,7)
-tablero.crear_tablero()
-tablero.colocar_pieza(0,0,1)
-tablero.colocar_pieza(0,1,1)
-tablero.colocar_pieza(0,2,2)
-tablero.colocar_pieza(0,3,1)
-tablero.colocar_pieza(0,4,2)
-tablero.colocar_pieza(0,5,1)
-tablero.colocar_pieza(1,1,1)
-tablero.colocar_pieza(1,2,1)
-tablero.colocar_pieza(1,3,2)
-tablero.colocar_pieza(1,4,2)
-tablero.colocar_pieza(1,5,1)
-tablero.colocar_pieza(2,2,2)
-tablero.colocar_pieza(1,0,2)
-tablero.colocar_pieza(2,1,2)
-tablero.print_tablero()
+#m = Minimax(tablero, [4,5,6])
 
-
-b = [[1, 1, 2, 1, 2, 1, 0],
-     [0, 1, 2, 2, 2, 0, 0],
-     [0, 0, 0, 0, 0, 0, 0],
-     [0, 0, 0, 0, 0, 0, 0],
-     [0, 0, 0, 0, 0, 0, 0],
-     [0, 0, 0, 0, 0, 0, 0]]
-
-
-m = Minimax(tablero)
-
-print(m.mejor_movimiento(tablero, 1))
+#print(m.mejor_movimiento(tablero, 1))
