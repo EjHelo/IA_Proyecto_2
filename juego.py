@@ -69,13 +69,14 @@ if opciones.humano_maquina:
             turn = 1
             
         tablero.print_tablero()
+    tablero.print_tablero()
     print(" La partida ha finalizado ")
 
 if opciones.maquina_maquina:
 
-    tablero = tablero(6,7)
-    agente1 = Agente(1,1,1,1,11)
-    agente2 = Agente(1,1,1,1,2)
+    tablero = Tablero(6,7)
+    agente1 = Agente(1,0.2,0.4,0.5,1)
+    agente2 = Agente(0.2,0.4,0.8,0.2,2)
     turn = 1
     tablero.print_tablero()
     print(" Inicia el juego maquina vs maquina ")
@@ -93,7 +94,7 @@ if opciones.maquina_maquina:
 
             tablero, bloqueo = agente1.bloquear(tablero)
             if not bloqueo:
-                columnas_estrategia = agente.escoger_columnas(tablero)
+                columnas_estrategia = agente1.escoger_columnas(tablero)
                 columna = agente1.funcion_costo(tablero, columnas_estrategia)
                 fila = tablero.get_fila_abierta(columna)
                 tablero.colocar_pieza(fila, columna, 1)
@@ -118,9 +119,9 @@ if opciones.maquina_maquina:
             
             if not bloqueo:
                 columnas_estrategia = agente2.escoger_columnas(tablero)
-                columna = agente.funcion_costo(tablero, columnas_estrategia)
+                columna = agente2.funcion_costo(tablero, columnas_estrategia)
                 fila = tablero.get_fila_abierta(columna)
-                tablero.colocar_pieza(fila, columna, 1)
+                tablero.colocar_pieza(fila, columna, 2)
 
                 if tablero.movimiento_gane(1):
                     print("Maquina #2 es la ganadora")
@@ -130,7 +131,7 @@ if opciones.maquina_maquina:
             turn = 1
         tablero.print_tablero()
         continuar = input("presione ENTER para continuar")      
-        
+    tablero.print_tablero()
     print(" La partida ha finalizado ")
 
 

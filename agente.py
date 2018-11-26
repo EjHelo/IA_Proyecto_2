@@ -64,7 +64,6 @@ class Agente:
         fila = []
         columna = []
         par = []
-        seed(2)
 
         ctr = random()
         if ctr <= self.centro:
@@ -99,20 +98,7 @@ class Agente:
         
     def eliminar_repetidos(self,centro_extremo, secuencia_espacio, fila_columna, par_impar):
         columnas=[]
-        default = list(set(centro_extremo).intersection(par_impar))
-        if(secuencia_espacio!=[]):
-            if(fila_columna!=[]):
-                aux = list(set(default).intersection(secuencia_espacio))
-                columnas = list(set(aux).intersection(fila_columna))
-            else:
-                columnas = list(set(default).intersection(secuencia_espacio))
-        else:
-            if(fila_columna!=[]):
-                columnas = list(set(default).intersection(fila_columna))
-            else:
-                columnas = default
-        if columnas==[]:
-            return default
+        columnas = list(set(centro_extremo+secuencia_espacio+fila_columna+par_impar))
         return columnas
                 
 
