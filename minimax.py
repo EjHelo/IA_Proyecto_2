@@ -45,7 +45,7 @@ class Minimax(object):
                 mejor_alpha = alpha
                 mejor_movimiento = movimiento
         
-        return mejor_movimiento, mejor_alpha, lista_posiciones
+        return mejor_movimiento
         
     #Funcion que retorna el valor alpha buscado en el arbol de profundidad
     def busqueda(self, profundidad, tablero, jugador_actual):
