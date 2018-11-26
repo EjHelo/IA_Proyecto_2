@@ -5,14 +5,14 @@ from random import random
 
 class Agente:
 
-    def __init__(self, secuencia_espacio, centro_extremo, fila_columna, bloquear, pieza ):
+    def __init__(self, secuencia_espacio, centro_extremo, fila_columna, par_impar, pieza ):
         self.secuencia = secuencia_espacio
         #self.espacio= 1-secuencia_espacio
         self.centro= centro_extremo
         #self.extremo= 1-centro_extremo
         self.fila = fila_columna
         #self.columna= 1-fila_columna
-        self.bloquear = bloquear
+        self.par = par_impar
         self.victorias = 0
         self.pieza = pieza
 
@@ -56,13 +56,14 @@ class Agente:
         secuencia = []
         fila = []
         columna = []
+        par = []
         seed(2)
 
         ctr = random()
         if ctr <= self.centro:
-            lista= [3,4,5]
+            lista= [2,3,4]
         else:
-            lista= [1,2,6,7]
+            lista= [0,1,5,6]
         
         sec = random()
         if(sec <= self.secuencia):
@@ -74,18 +75,39 @@ class Agente:
         if row <= self.fila:
             fila = tablero.get_lista_fila(self.pieza)
         else:
-            columna = tablero.get_lista_columna(self.pieza)
+            fila = tablero.get_lista_columna(self.pieza)
+
+        even = random ()
+        if even <= self.par:
+            par = [1,3,5]
+        else:
+            par = [0,2,4,6]
         print(lista)
         print(secuencia)
-        print(columna)
         print(fila)
-        print(ctr)
-        print(sec)
-        print(row)
-        return lista
+        print(par)
+        print(self.eliminar_repetidos(lista,secuencia,fila,par))
+        return self.eliminar_repetidos(lista,secuencia,fila,par)
+
         
-        
-        
+    def eliminar_repetidos(self,centro_extremo, secuencia_espacio, fila_columna, par_impar):
+        columnas=[]
+        default = list(set(centro_extremo).intersection(par_impar))
+        if(secuencia_espacio!=[]):
+            if(fila_columna!=[]):
+                aux = list(set(default).intersection(secuencia_espacio))
+                columnas = list(set(aux).intersection(fila_columna))
+            else:
+                columnas = list(set(default).intersection(secuencia_espacio))
+        else:
+            if(fila_columna!=[]):
+                columnas = list(set(default).intersection(fila_columna))
+            else:
+                columnas = default
+        if columnas==[]:
+            return default
+        return columnas
+                
 
     def realizar_movida(self,tablero):
         #funcion de costo para las columnas
