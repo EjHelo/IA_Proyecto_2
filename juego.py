@@ -54,7 +54,7 @@ if opciones.humano_maquina:
             
             if not bloqueo:
                 columnas_estrategia = agente.escoger_columnas(tablero)
-                columna = agente.funcion_costo(tablero)
+                columna = agente.funcion_costo(tablero, columnas_estrategia)
                 fila = tablero.get_fila_abierta(columna)
                 tablero.colocar_pieza(fila, columna, 1)
 
@@ -91,7 +91,7 @@ if opciones.maquina_maquina:
             tablero, bloqueo = agente1.bloquear(tablero)
             if not bloqueo:
                 columnas_estrategia = agente.escoger_columnas(tablero)
-                columna = agente1.funcion_costo(tablero)
+                columna = agente1.funcion_costo(tablero, columnas_estrategia)
                 fila = tablero.get_fila_abierta(columna)
                 tablero.colocar_pieza(fila, columna, 1)
 
@@ -115,7 +115,7 @@ if opciones.maquina_maquina:
             
             if not bloqueo:
                 columnas_estrategia = agente2.escoger_columnas(tablero)
-                columna = agente.funcion_costo(tablero)
+                columna = agente.funcion_costo(tablero, columnas_estrategia)
                 fila = tablero.get_fila_abierta(columna)
                 tablero.colocar_pieza(fila, columna, 1)
 

@@ -102,6 +102,13 @@ class Tablero:
         return lista
 
 
+    def extraer_fila_completa(self, fila):
+        lista = []
+        for col in ranga(self.columna):
+            lista += [ self.board[fila][col] ]
+        return lista
+
+
     def movimiento_gane(self,pieza):
     # Gana horizontal
         for col in range(self.columna-3):
