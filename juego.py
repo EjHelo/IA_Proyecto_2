@@ -125,9 +125,9 @@ if opciones.maquina_maquina:
 
                 
             turn = 1
-        continuar = input("presione ENTER para continuar")
-        
         tablero.print_tablero()
+        continuar = input("presione ENTER para continuar")      
+        
     print(" La partida ha finalizado ")
 
 
