@@ -75,7 +75,7 @@ if opciones.humano_maquina:
 if opciones.maquina_maquina:
 
     tablero = Tablero(6,7)
-    agente1 = Agente(1,0.2,0.4,0.5,1)
+    agente1 = Agente(0.2,1,0.4,0.5,1)
     agente2 = Agente(0.2,0.4,0.8,0.2,2)
     turn = 1
     tablero.print_tablero()
@@ -123,7 +123,7 @@ if opciones.maquina_maquina:
                 fila = tablero.get_fila_abierta(columna)
                 tablero.colocar_pieza(fila, columna, 2)
 
-                if tablero.movimiento_gane(1):
+                if tablero.movimiento_gane(2):
                     print("Maquina #2 es la ganadora")
                     break
 

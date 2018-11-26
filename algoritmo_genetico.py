@@ -1,5 +1,6 @@
 from agente import Agente
 from tablero import Tablero
+from jugar import Jugar
 import random as rd
 
 #Debe tener un N - n agentes
@@ -44,11 +45,18 @@ class AlgoritmoGenetico:
     def generaciones(self):
         for g in range(self.num_gen):
             print(g)
+        a = self.poblacion[0]
+        b = self.poblacion[1]
+        print(a.get_estrategias())
+        self.jugar(a,b)
 
     ''' determinacion del ganador'''
-    def jugar(agente1, agente2):
-        tablero = Tablero(6,7)
+    def jugar(self,agente1, agente2):
         
+        agente1.set_pieza(1)
+        agente2.set_pieza(2)
+        juego = Jugar(agente1,agente2)
+        juego.jugar()
     
         
 
