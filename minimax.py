@@ -40,12 +40,22 @@ class Minimax(object):
         random.shuffle(list(movimientos))
         lista_posiciones =[]
         for movimiento, alpha in movimientos:
-            lista_posiciones += [movimiento, alpha]
+            lista_posiciones += [[movimiento, alpha]]
             if alpha >= mejor_alpha:
                 mejor_alpha = alpha
-                mejor_movimiento = movimiento
-        
-        return mejor_movimiento
+                mejor_movimiento = movimiento      
+        bandera = 0
+        numero_alpha = lista_posiciones[0][1]
+        for i in range(len(lista_posiciones)):
+            if lista_posiciones[i][1] == numero_alpha:
+                bandera = 1
+            else:
+                bandera = 0
+                break
+        if bandera == 0:
+            return mejor_movimiento
+        else:
+            return (len(lista_posiciones) // 2)
         
     #Funcion que retorna el valor alpha buscado en el arbol de profundidad
     def busqueda(self, profundidad, tablero, jugador_actual):
@@ -180,15 +190,6 @@ class Minimax(object):
 
         return total
 
+m = Minimax(tablero, [0,1,2,3,4,5,6])
 
-#m = Minimax(tablero, [4,5,6])
-
-#print(m.mejor_movimiento(tablero, 1))
-
-
-
-
-
-
-
-    
+print(m.mejor_movimiento(tablero, 1))
