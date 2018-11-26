@@ -57,7 +57,9 @@ if opciones.humano_maquina:
                 columnas_estrategia = agente.escoger_columnas(tablero)
                 columna = agente.funcion_costo(tablero, columnas_estrategia)
                 fila = tablero.get_fila_abierta(columna)
-                tablero.colocar_pieza(fila, columna, 1)
+                if fila == None:
+                    continue
+                tablero.colocar_pieza(fila, columna, 2)
 
                 if tablero.movimiento_gane(1):
                     print("Maquina es la ganadora")

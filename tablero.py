@@ -42,6 +42,7 @@ class Tablero:
         for fila in range (self.fila):
             if self.board[fila][columna]==0:
                 return fila
+        return None
 
 
     def get_lista_columna(self, pieza):
@@ -104,7 +105,7 @@ class Tablero:
 
     def extraer_fila_completa(self, fila):
         lista = []
-        for col in ranga(self.columna):
+        for col in range(self.columna):
             lista += [ self.board[fila][col] ]
         return lista
 

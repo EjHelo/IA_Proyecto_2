@@ -1,6 +1,6 @@
 import random
 
-from Tablero import *
+from tablero import Tablero
 
 class Minimax(object):
       
@@ -8,7 +8,7 @@ class Minimax(object):
     vector = []
     
     def __init__(self, board, vector):
-        self.board = tablero.get_tablero() #Respaldo del tablero
+        self.board = board.get_tablero() #Respaldo del tablero
         self.vector = vector
     
     #Función que retorna el número de columnaa del mejor movimiento       
@@ -184,3 +184,11 @@ class Minimax(object):
 #m = Minimax(tablero, [4,5,6])
 
 #print(m.mejor_movimiento(tablero, 1))
+
+
+
+
+
+
+
+    

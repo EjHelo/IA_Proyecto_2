@@ -3,6 +3,8 @@
 from random import seed
 from random import random
 
+from minimax import Minimax
+
 import copy
 
 class Agente:
@@ -114,10 +116,18 @@ class Agente:
         return columnas
                 
 
-    def realizar_movida(self,tablero):
-        #funcion de costo para las columnas
-        #tiene q devolver tablero
-        pass
+    def funcion_costo(self, tablero, columnas_estrategia):
+        minimax = Minimax(tablero, columnas_estrategia)
+        return minimax.mejor_movimiento(tablero, self.pieza)
 
-    def funcion_costo(self):
-        pass
+
+    
+
+
+
+
+
+
+
+
+    
