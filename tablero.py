@@ -126,11 +126,13 @@ class Tablero:
                     return True
         return False
 
+
     #Verifica si el tablero está lleno
     def tablero_lleno(self):
         if not 0 in self.board:
             return True
         return False
+
     
     def revisar_espacio(self, fila, columna, pieza):
         if columna == 0 or columna ==1:

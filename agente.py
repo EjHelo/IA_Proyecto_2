@@ -28,10 +28,29 @@ class Agente:
                 if temp_tablero.movimiento_gane(self.pieza):
                     # Si tiene gane realiza la jugada de gane y retorna el tablero
                     tablero.colocar_pieza(fila, col, self.pieza)
-                    return tablero      
-        
+                    return tablero, True      
+        return tablero, False
 
-    def escoger_columnas(self, tablero, pieza):
+    def bloquear(self, tablero):
+        oponente = 0
+        if self.pieza == 1:
+            oponente = 2
+        else:
+            oponente = 1
+
+        for col in range(columna):
+            temp_tablero = copy.copy(tablero)
+            if temp_tablero.columna_valida(col):
+                # Simula jugada
+                fila = temp_tablero.get_fila_abierta(columna)
+                temp_tablero.colocar_pieza(fila, col, oponente)
+                if temp_tablero.movimiento_gane(oponente):
+                    # Si tiene gane realiza la jugada de bloqueo y retorna el tablero
+                    tablero.colocar_pieza(fila, col, self.pieza)
+                    return tablero, True 
+        return tablero, False
+
+    def escoger_columnas(self, tablero):
         #buscar caracteristicas en tablero
         lista = []
         secuencia = []
