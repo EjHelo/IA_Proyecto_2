@@ -1,15 +1,22 @@
 import random
 
+from Tablero import *
+
 class Minimax(object):
       
     board = None
     
     def __init__(self, board):
-        self.board = [x[:] for x in board] #Respaldo del tablero
+        self.board = tablero.get_tablero() #Respaldo del tablero
         #self.vector = vector
     
     #Función que retorna el número de columnaa del mejor movimiento       
-    def mejor_movimiento(self, profundidad, tablero, jugador_actual):
+    def mejor_movimiento(self, obj_tablero, jugador_actual):
+
+        tablero = []
+        profundidad = 3
+        for i in range(6):
+            tablero += [obj_tablero.extraer_fila_completa(i)]
                 
         # determinar jugadores
         if jugador_actual == 1:
@@ -20,7 +27,7 @@ class Minimax(object):
         movimientos_permitidos = {} # enum de todos los movimientos permitidos
         for col in range(7):
             # verifica si la columna tiene espacios disponibles
-            if self.campos_columna(col, tablero):
+            if tablero[5][col] == 0:
                 # Hace el movimiento en la columna para el jugador actual
                 temporal = self.mover(tablero, col, jugador_actual)
                 movimientos_permitidos[col] = -self.busqueda(profundidad-1, temporal, jugador_oponente)
@@ -41,9 +48,9 @@ class Minimax(object):
     #Funcion que retorna el valor alpha buscado en el arbol de profundidad
     def busqueda(self, profundidad, tablero, jugador_actual):
         movimientos_permitidos = [] #Todos los movimientos permitidos del tablero
-        for i in range(7):
-            if self.campos_columna(i, tablero):
-                temporal = self.mover(tablero, i, jugador_actual) #mueve en columna i
+        for col in range(7):
+            if tablero[5][col] == 0:
+                temporal = self.mover(tablero, col, jugador_actual) #mueve en columna i
                 movimientos_permitidos.append(temporal)
         
         if profundidad == 0 or len(movimientos_permitidos) == 0 or self.terminado(tablero):
@@ -62,14 +69,7 @@ class Minimax(object):
                 print("Búsqueda vacía")
             alpha = max(alpha, -self.busqueda(profundidad-1, movimiento, jugador_oponente))
         return alpha
-
-    #Función que verifica si la columna tiene un espacio disponible
-    def campos_columna(self, columna, tablero):
-        for i in range(6):
-            if tablero[i][columna] == 0:
-                return True
-        return False
-    
+     
     #Verifica si ya hay un gana con el consecutivo de 4 fichas
     def terminado(self, tablero):
         if self.chequeo_consecutivos(tablero, 1, 4) >= 1:
@@ -103,7 +103,7 @@ class Minimax(object):
         if consecutivo4_oponente > 0:
             return -100000
         else:
-            return consecutivo4_actual*100000 + consecutivo3_actual*100 + consecutivo2_actual*10
+            return consecutivo4_actual*100000 + consecutivo3_actual*100 + consecutivo2_actual
             
     def chequeo_consecutivos(self, tablero, jugador_actual, consecutivo):
         contador = 0
@@ -176,6 +176,24 @@ class Minimax(object):
         return total
 
 
+tablero = Tablero(6,7)
+tablero.crear_tablero()
+tablero.colocar_pieza(0,0,1)
+tablero.colocar_pieza(0,1,1)
+tablero.colocar_pieza(0,2,2)
+tablero.colocar_pieza(0,3,1)
+tablero.colocar_pieza(0,4,2)
+tablero.colocar_pieza(0,5,1)
+tablero.colocar_pieza(1,1,1)
+tablero.colocar_pieza(1,2,1)
+tablero.colocar_pieza(1,3,2)
+tablero.colocar_pieza(1,4,2)
+tablero.colocar_pieza(1,5,1)
+tablero.colocar_pieza(2,2,2)
+tablero.colocar_pieza(1,0,2)
+tablero.colocar_pieza(2,1,2)
+tablero.print_tablero()
+
 
 b = [[1, 1, 2, 1, 2, 1, 0],
      [0, 1, 2, 2, 2, 0, 0],
@@ -185,8 +203,6 @@ b = [[1, 1, 2, 1, 2, 1, 0],
      [0, 0, 0, 0, 0, 0, 0]]
 
 
-m = Minimax(b)
+m = Minimax(tablero)
 
-print("Mejor movimiento para jugador")
-
-print(m.mejor_movimiento(4, b, 1))
+print(m.mejor_movimiento(tablero, 1))
