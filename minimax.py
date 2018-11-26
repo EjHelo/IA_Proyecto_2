@@ -55,7 +55,8 @@ class Minimax(object):
         if bandera == 0:
             return mejor_movimiento
         else:
-            return (len(lista_posiciones) // 2)
+            indice = (len(lista_posiciones) // 2)
+            return lista_posiciones[indice][0]
         
     #Funcion que retorna el valor alpha buscado en el arbol de profundidad
     def busqueda(self, profundidad, tablero, jugador_actual):
@@ -190,6 +191,6 @@ class Minimax(object):
 
         return total
 
-m = Minimax(tablero, [0,1,2,3,4,5,6])
+#m = Minimax(tablero, [0,1,2,3,4,5,6])
 
-print(m.mejor_movimiento(tablero, 1))
+#print(m.mejor_movimiento(tablero, 1))
