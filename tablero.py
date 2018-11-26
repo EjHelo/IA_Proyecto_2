@@ -109,27 +109,27 @@ class Tablero:
         return lista
 
 
-    def movimiento_gane(self,pieza):
+    def movimiento_gane(self, pieza):
     # Gana horizontal
         for col in range(self.columna-3):
             for fila in range(self.fila):
-                if self.board[fila][col] == piece and self.board[fila][col+1] == piece and self.board[fila][col+2] == piece and self.board[fila][col+3] == piece :
+                if self.board[fila][col] == pieza and self.board[fila][col+1] == pieza and self.board[fila][col+2] == pieza and self.board[fila][col+3] == pieza :
                     return True
 
     # Gana vertical
         for col in range(self.columna):
             for fila in range(self.fila-3):
-                if self.board[fila][col] == piece and self.board[fila+1][col] == piece and self.board[fila+2][col] == piece and self.board[fila+3][col] == piece :
+                if self.board[fila][col] == pieza and self.board[fila+1][col] == pieza and self.board[fila+2][col] == pieza and self.board[fila+3][col] == pieza :
                     return True
 
     # Gana por diagonal
         for col in range(self.columna-3):
             for fila in range(self.fila-3):
-                if self.board[fila][col] == piece and self.board[fila+1][col+1] == piece and self.board[fila+2][col+2] == piece and self.board[fila+3][col+3] == piece :
+                if self.board[fila][col] == pieza and self.board[fila+1][col+1] == pieza and self.board[fila+2][col+2] == pieza and self.board[fila+3][col+3] == pieza :
                     return True
                 
             for fila in range(3, self.fila):
-                if self.board[fila][col] == piece and self.board[fila-1][col+1] == piece and self.board[fila-2][col+2] == piece and self.board[fila-3][col+3] == piece :
+                if self.board[fila][col] == pieza and self.board[fila-1][col+1] == pieza and self.board[fila-2][col+2] == pieza and self.board[fila-3][col+3] == pieza :
                     return True
         return False
 

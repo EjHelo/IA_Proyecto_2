@@ -3,6 +3,8 @@
 from random import seed
 from random import random
 
+import copy
+
 class Agente:
 
     def __init__(self, secuencia_espacio, centro_extremo, fila_columna, par_impar, pieza ):
@@ -20,15 +22,16 @@ class Agente:
         columna = tablero.get_columna()
         
         for col in range(columna):
-            temp_tablero = copy.copy(tablero)
+            temp_tablero = copy.deepcopy(tablero)
             if temp_tablero.columna_valida(col):
                 # Simula jugada
-                fila = temp_tablero.get_fila_abierta(columna)
+                fila = temp_tablero.get_fila_abierta(col)
                 temp_tablero.colocar_pieza(fila, col, self.pieza)
                 if temp_tablero.movimiento_gane(self.pieza):
                     # Si tiene gane realiza la jugada de gane y retorna el tablero
                     tablero.colocar_pieza(fila, col, self.pieza)
-                    return tablero      
+                    return tablero, True
+        return tablero,False
 
 
     def bloquear(self, tablero):
@@ -38,19 +41,21 @@ class Agente:
         else:
             oponente = 1
 
+        columna = tablero.get_columna()
         for col in range(columna):
-            temp_tablero = copy.copy(tablero)
+            temp_tablero = copy.deepcopy(tablero)
             if temp_tablero.columna_valida(col):
                 # Simula jugada
-                fila = temp_tablero.get_fila_abierta(columna)
+                fila = temp_tablero.get_fila_abierta(col)
                 temp_tablero.colocar_pieza(fila, col, oponente)
                 if temp_tablero.movimiento_gane(oponente):
                     # Si tiene gane realiza la jugada de bloqueo y retorna el tablero
                     tablero.colocar_pieza(fila, col, self.pieza)
-                    return tablero 
-    
+                    return tablero, True
+        return tablero, False
+        
 
-    def escoger_columnas(self, tablero, pieza):
+    def escoger_columnas(self, tablero):
         #buscar caracteristicas en tablero
         lista = []
         secuencia = []

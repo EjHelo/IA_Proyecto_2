@@ -17,7 +17,7 @@ parser.add_option("", "--maquina-maquina", action="store_true", dest="maquina_ma
 
 if opciones.humano_maquina:
 
-    tablero = tablero(6,7)
+    tablero = Tablero(6,7)
     agente = Agente(1,1,1,1,2)
     turn = 1
     tablero.print_tablero()
@@ -47,6 +47,7 @@ if opciones.humano_maquina:
             tablero, gane = agente.ganar(tablero)
 
             if gane:
+                tablero.print_tablero()
                 print("Maquina es la ganadora")
                 break
 
