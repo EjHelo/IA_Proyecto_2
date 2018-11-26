@@ -20,6 +20,24 @@ class Agente:
         self.victorias = 0
         self.pieza = pieza
 
+    def set_estrategias(self, lista_estrategias):
+        self.secuencia = lista_estrategias[0]
+        self.centro = lista_estrategias[1]
+        self.fila = lista_estrategias[2]
+        self.par = lista_estratefias[3]
+
+    def get_estrategias(self):
+        return [self.secuencia, self.centro, self.fila, self.par]
+
+    def set_victorias(self, numero):
+        self.victorias = numero
+    def get_victorias(self):
+        return self.victorias
+    def set_pieza(self,pieza):
+        self.pieza = pieza
+    def get_pieza(self):
+        return self.pieza
+
     def ganar(self, tablero):
         columna = tablero.get_columna()
         
