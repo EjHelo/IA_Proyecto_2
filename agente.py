@@ -31,6 +31,8 @@ class Agente:
 
     def set_victorias(self, numero):
         self.victorias = numero
+    def incrementar_victorias(self):
+        self.victorias += 1
     def get_victorias(self):
         return self.victorias
     def set_pieza(self,pieza):
@@ -110,9 +112,19 @@ class Agente:
         print(secuencia)
         print(fila)
         print(par)
-        print(self.eliminar_repetidos(lista,secuencia,fila,par))
-        return self.eliminar_repetidos(lista,secuencia,fila,par)
+        print("as ",self.eliminar_repetidos(lista,secuencia,fila,par))
+        check = self.eliminar_repetidos(lista,secuencia,fila,par)
+        respuesta = self.validar_columnas(tablero,check)
+        print(respuesta)
+        return respuesta
 
+    def validar_columnas(self,tablero,lista):
+        aux = []
+        for i in lista:
+            if  tablero.columna_valida(i):
+                aux+=[i]
+        
+        return aux
         
     def eliminar_repetidos(self,centro_extremo, secuencia_espacio, fila_columna, par_impar):
         columnas=[]

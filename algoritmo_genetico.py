@@ -56,7 +56,7 @@ class AlgoritmoGenetico:
         agente1.set_pieza(1)
         agente2.set_pieza(2)
         juego = Jugar(agente1,agente2)
-        juego.jugar()
+        agente1,agente2 = juego.jugar()
     
         
 

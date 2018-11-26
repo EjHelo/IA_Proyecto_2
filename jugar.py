@@ -9,7 +9,7 @@ class Jugar:
         self.turn =1
 
     def jugar(self):
-
+        flag_tie = True
         print("pase")
         while not self.tablero.tablero_lleno():
            
@@ -31,6 +31,8 @@ class Jugar:
 
                     if self.tablero.movimiento_gane(1):
                         print("Maquina #1 es la ganadora")
+                        self.agente1.incrementar_victorias()
+                        flag_tie = True
                         break
 
                     
@@ -55,10 +57,15 @@ class Jugar:
 
                     if self.tablero.movimiento_gane(2):
                         print("Maquina #2 es la ganadora")
+                        self.agente2.incrementar_victorias()
+                        flag_tie=True
                         break
 
                     
                 self.turn = 1
-            
+        if(flag_tie):
+            self.agente1.incrementar_victorias()
+            self.agente2.incrementar_victorias()
         self.tablero.print_tablero()
         print(" La partida ha finalizado ")
+        return self.agente1, self.agente2

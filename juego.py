@@ -95,8 +95,12 @@ if opciones.maquina_maquina:
             tablero, bloqueo = agente1.bloquear(tablero)
             if not bloqueo:
                 columnas_estrategia = agente1.escoger_columnas(tablero)
+                print(columnas_estrategia)
                 columna = agente1.funcion_costo(tablero, columnas_estrategia)
+                print("escogi",columna)
                 fila = tablero.get_fila_abierta(columna)
+                #if fila == None:
+                 #   continue
                 tablero.colocar_pieza(fila, columna, 1)
 
                 if tablero.movimiento_gane(1):
@@ -119,8 +123,12 @@ if opciones.maquina_maquina:
             
             if not bloqueo:
                 columnas_estrategia = agente2.escoger_columnas(tablero)
+                print(columnas_estrategia)
                 columna = agente2.funcion_costo(tablero, columnas_estrategia)
+                print("escogi",columna)
                 fila = tablero.get_fila_abierta(columna)
+                #if fila == None:
+                #    continue
                 tablero.colocar_pieza(fila, columna, 2)
 
                 if tablero.movimiento_gane(2):
