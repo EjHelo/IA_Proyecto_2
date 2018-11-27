@@ -1,4 +1,4 @@
-from Tablero import *
+from tablero import *
 
    
 def test_columna_valida():

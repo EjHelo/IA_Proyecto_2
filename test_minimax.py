@@ -1,6 +1,6 @@
 
 from minimax import *
-from Tablero import *
+from tablero import *
 
 
 def test_busqueda():

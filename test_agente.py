@@ -1,6 +1,6 @@
 
-from agente import *
-
+from agente import Agente
+from tablero import Tablero
 
 def test_get_estrategias():
 	#Datos de entrada
@@ -100,6 +100,7 @@ def test_escoger_columnas():
 
 def test_eliminar_repetidos():
 	#Datos de entrada
+    agente = Agente(1,1,1,1,2)
     centro = [2,3,4]
     secuencia = [5,1,2,3,4,5]
     fila = [5]

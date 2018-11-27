@@ -11,24 +11,35 @@ from copy import deepcopy
 class AlgoritmoGenetico:
     poblacion = []
 
+    '''Constructor'''
     def __init__(self, tam_poblacion, numero_agentes, numero_generaciones):
+        self.poblacion=[]
         self.iniciar_poblacion(tam_poblacion)
         self.num_agentes = numero_agentes
         self.num_gen = numero_generaciones
-
+        
+    ''' Inicializacion de la poblacion'''
     def iniciar_poblacion(self, tam):
         for i in range(tam):
             probabilidad  = self.get_random_caracteristica()
             agente = Agente(probabilidad[0], probabilidad[1], probabilidad[2],probabilidad[3],1)
             self.poblacion+=[agente]
 
+    '''setter y getter'''
+    def get_poblacion(self):
+        return self.poblacion
+    def set_poblacion(self,poblacion):
+        self.poblacion = poblacion
+
+    '''aleatoriedad de probabilidades para las caracteristicas'''
     def get_random_caracteristica(self):
         lista = []
         for i in range(4):
             probabilidad = round(rd.random(),2)
             lista.append(probabilidad)
         return lista
-    ''' Debe realizar juego '''
+    
+    ''' Realizacion del juego entre agentes '''
     def juego_genetico(self):
 
         temporal = self.poblacion[:]
@@ -57,17 +68,14 @@ class AlgoritmoGenetico:
         agente2.set_pieza(2)
         juego = Jugar(agente1,agente2)
         return juego.jugar()
-    
-        
-
+     
+    '''estrategias de cada agente de la poblacion '''
     def print_estrategias(self):
         for a in self.poblacion:
             print(a.get_estrategias())
 
-    def mutacion_cruzado():
-        pass
 
-
+    ''' cruce de agentes y una mutacion'''
     def cruce_agentes(self):
 
         poblacion_ordenada = sorted(self.poblacion, key=lambda objeto: objeto.victorias, reverse=True)
@@ -106,20 +114,6 @@ class AlgoritmoGenetico:
         estrategias[indice_estrategia] = probabilidad
         agente = Agente(estrategias[0],estrategias[1],estrategias[2],estrategias[3],1)
         return agente
-'''
-    def cruce_ejemplo(self):
-        agente1 = Agente(1,1,1,1,1)
-        agente2 = Agente(0,0,0,0,2)
-        agente3 = self.cruce_agentes()
-        for a in agente3:
-            print(a.get_estrategias())
-        
-'''
 
-
-alg = AlgoritmoGenetico(4,1,2)
-alg.generaciones()
-
-alg.print_estrategias()
     
     
