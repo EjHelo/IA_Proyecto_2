@@ -1,5 +1,6 @@
 from tablero import Tablero
 from agente import Agente
+from algoritmo_genetico import AlgoritmoGenetico
 
 from random import seed
 from random import random
@@ -12,13 +13,35 @@ parser = OptionParser()
 
 parser.add_option("", "--humano-maquina", action="store_true", dest="humano_maquina", default=False, help="Seleciona modalidad de juego humano vs maquina")
 parser.add_option("", "--maquina-maquina", action="store_true", dest="maquina_maquina", default=False, help="Seleciona modalidad de juego maquina vs maquina")
+parser.add_option("", "--maquina-configuracion", dest="config", default=[],help="configuracion de la maquina")
+parser.add_option("", "--algoritmo-genetico", action="store_true", dest="algoritmo_genetico", default=False, help="Ejecuta generacion de agentes")
+parser.add_option("", "--cantidad_agentes",  dest="cant_agent", default=1, help="Seleccione cantidad de agentes")
+parser.add_option("", "--cantidad_generaciones",  dest="cant_gen", default=1, help="Seleccione cantidad de generaciones")
+parser.add_option("", "--tamaño_poblacion",  dest="tam_pob", default=2, help="Seleccione la cantidad de poblacion")
 
 (opciones, args) = parser.parse_args()
+
+if opciones.algoritmo_genetico:
+    tam_pob = opciones.tam_pob
+    cant_agentes = opciones.cant_agent
+    cant_gen = opciones.cant_gen
+    gen = AlgoritmoGenetico(int(tam_pob), int(cant_agentes), int(cant_gen))
+    gen.generaciones()
+    
+
 
 if opciones.humano_maquina:
 
     tablero = Tablero(6,7)
-    agente = Agente(1,1,1,1,2)
+    agente = []
+    if (opciones.config != []):
+        lista = list(eval(opciones.config))
+        print(type(lista))
+        print(type(lista[0]))
+        print (lista)
+        agente = Agente(lista[0],lista[1],lista[2],lista[3],2)
+    else:
+        agente = Agente(1,1,1,1,2)
     turn = 1
     tablero.print_tablero()
     print(" Inicia Humano, jugador 1 ")
@@ -63,9 +86,7 @@ if opciones.humano_maquina:
 
                 if tablero.movimiento_gane(1):
                     print("Maquina es la ganadora")
-                    break
-
-                
+                    break        
             turn = 1
             
         tablero.print_tablero()

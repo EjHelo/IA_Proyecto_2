@@ -27,8 +27,12 @@ class Agente:
         self.par = lista_estratefias[3]
 
     def get_estrategias(self):
-        return [self.secuencia, self.centro, self.fila, self.par]
+        return [self.secuencia,self.centro,self.fila,self.par]
 
+    def estrategias_to_string(self):
+        string = '['+str(self.secuencia)+','+str(self.centro)+','+str(self.fila)+','+str(self.par)+']'
+        print( string)
+    
     def set_victorias(self, numero):
         self.victorias = numero
     def incrementar_victorias(self):

@@ -43,16 +43,12 @@ class AlgoritmoGenetico:
     def juego_genetico(self):
 
         temporal = self.poblacion[:]
-        print(len(temporal))
         for i in range (len(temporal)):
             for j in range (len(temporal)):
                 if i!=j:
                     temporal[i], temporal[j] = self.jugar(temporal[i],temporal[j])
 
         self.poblacion = sorted(temporal[:]  , key=lambda objeto:objeto.victorias, reverse=True)
-
-        for agente in self.poblacion:
-            print("victorias= ",agente.get_victorias())
   
 
     ''' cada generacion se realiza el juego_genetico'''
@@ -60,7 +56,9 @@ class AlgoritmoGenetico:
         for i in range (self.num_gen):
             self.juego_genetico()
             self.cruce_agentes()
-        
+        poblacion_ordenada = sorted(self.poblacion, key=lambda objeto: objeto.victorias, reverse=True)
+        print("Mejor configuracion")
+        poblacion_ordenada[0].estrategias_to_string()
     ''' determinacion del ganador'''
     def jugar(self,agente1, agente2):
         
@@ -79,12 +77,10 @@ class AlgoritmoGenetico:
     def cruce_agentes(self):
 
         poblacion_ordenada = sorted(self.poblacion, key=lambda objeto: objeto.victorias, reverse=True)
-        print(len(poblacion_ordenada))
         nueva_poblacion=poblacion_ordenada[:self.num_agentes]
         resto_poblacion=poblacion_ordenada[self.num_agentes:]
         resultado = []
         resultado += nueva_poblacion
-        print("res",len(resultado))
         for i in range (len(resto_poblacion)):
             
             if( i==len(resto_poblacion)-1):
@@ -93,10 +89,8 @@ class AlgoritmoGenetico:
                 break;
                 
             else:
-                print(i)
                 agente = self.cruce_agentes_aux(poblacion_ordenada[i],poblacion_ordenada[i+1])
                 resultado.append(agente)
-        print(len(resultado))
         self.poblacion = resultado[:]
         
     def cruce_agentes_aux(self, agente1, agente2):
