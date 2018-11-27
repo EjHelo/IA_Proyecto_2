@@ -32,7 +32,13 @@ Este programa recibe varias banderas, las cuales tienen un nombre, una descripci
 
 | Símbolo               	| Explicación                | Rango                                            |
 |-------------------------	|--------------------------------------------------------------	|----------------------------------------------------	|
-| --humano               	| Ejecuta la modalidad con jugador humano                                                                                  	| True o False                                                                                        	|
+| --humano-maquina  | Ejecuta la modalidad con Humano vs. Máquina  	| True o False  |
+| --maquina-maquina  | Ejecuta la modalidad con Máquina vs. Máquina  	| True o False  |
+| --maquina-configuracion  | Ejecuta la configuacion de la Máquina  	| True o False  |
+| --algoritmo-genetico  | Ejecuta la modalidad con Algoritmo Genético  	| True o False  |
+| --cantidad-agentes  | Asigna la cantidad de agentes  	| True o False  |
+| --cantidad-generaciones  | Asigna la cantidad de generaciones 	| True o False  |
+| --tamaño-poblacion  | Asigna el tamaño de la población  	| True o False  |
                                                                                	
 
 
