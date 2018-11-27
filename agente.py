@@ -108,14 +108,14 @@ class Agente:
             par = [1,3,5]
         else:
             par = [0,2,4,6]
-        print(lista)
-        print(secuencia)
-        print(fila)
-        print(par)
-        print("as ",self.eliminar_repetidos(lista,secuencia,fila,par))
+        '''print("Centro vs Extremo",lista)
+        print("Secuencia espacio",secuencia)
+        print("fila, columna",fila)
+        print("par, impar",par)'''
+        #print("as ",self.eliminar_repetidos(lista,secuencia,fila,par))
         check = self.eliminar_repetidos(lista,secuencia,fila,par)
         respuesta = self.validar_columnas(tablero,check)
-        print(respuesta)
+        #print(respuesta)
         return respuesta
 
     def validar_columnas(self,tablero,lista):

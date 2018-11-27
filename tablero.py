@@ -40,9 +40,8 @@ class Tablero:
     #busca el espacio mas abajo de la columna que este desocupada        
     def get_fila_abierta(self,columna):
         for fila in range (self.fila):
-            if self.board[fila][columna]==0:
+            if (self.board[fila][columna]==0):
                 return fila
-        return None
 
 
     def get_lista_columna(self, pieza):
@@ -88,7 +87,6 @@ class Tablero:
             for c in range (self.columna-1):
                 if self.board[fila][c]== pieza:
                     if (self.revisar_espacio(fila,c,pieza))!=0:
-                        print("entre")
                         lista+=[c+self.revisar_espacio(fila,c,pieza)]
                     
         return lista
@@ -195,6 +193,13 @@ class Tablero:
         else:
             print("nolo encontre")
 
+    def get_columna_aleatoria(self):
+        lista=[]
+        for i in range(self.columna):
+            if self.board[5][i]==0:
+                lista+=[i]
+        return lista
+
 #ejemplo           
 def jugar():
     tablero = Tablero(6,7)
@@ -216,3 +221,5 @@ def jugar():
         #tablero.revisar_punto(fila,column)
         lista = tablero.get_lista_columna(1)
         print(lista)
+
+

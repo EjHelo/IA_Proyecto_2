@@ -1,6 +1,6 @@
 import random
 
-from Tablero import *
+from tablero import *
 
 class Minimax(object):
       
