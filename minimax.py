@@ -1,6 +1,6 @@
 import random
 
-from tablero import Tablero
+from Tablero import *
 
 class Minimax(object):
       
@@ -45,13 +45,13 @@ class Minimax(object):
                 mejor_alpha = alpha
                 mejor_movimiento = movimiento      
         bandera = 0
-        numero_alpha = lista_posiciones[0][1]
-        for i in range(len(lista_posiciones)):
-            if lista_posiciones[i][1] == numero_alpha:
-                bandera = 1
-            else:
-                bandera = 0
-                break
+        #numero_alpha = lista_posiciones[0][1]
+        #for i in range(len(lista_posiciones)):
+            #if lista_posiciones[i][1] == numero_alpha:
+                #bandera = 1
+            #else:
+                #bandera = 0
+                #break
         if bandera == 0:
             return mejor_movimiento
         else:
