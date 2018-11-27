@@ -15,9 +15,9 @@ parser.add_option("", "--humano-maquina", action="store_true", dest="humano_maqu
 parser.add_option("", "--maquina-maquina", action="store_true", dest="maquina_maquina", default=False, help="Seleciona modalidad de juego maquina vs maquina")
 parser.add_option("", "--maquina-configuracion", dest="config", default=[],help="configuracion de la maquina")
 parser.add_option("", "--algoritmo-genetico", action="store_true", dest="algoritmo_genetico", default=False, help="Ejecuta generacion de agentes")
-parser.add_option("", "--cantidad_agentes",  dest="cant_agent", default=1, help="Seleccione cantidad de agentes")
-parser.add_option("", "--cantidad_generaciones",  dest="cant_gen", default=1, help="Seleccione cantidad de generaciones")
-parser.add_option("", "--tamaño_poblacion",  dest="tam_pob", default=2, help="Seleccione la cantidad de poblacion")
+parser.add_option("", "--cantidad-agentes",  dest="cant_agent", default=1, help="Seleccione cantidad de agentes")
+parser.add_option("", "--cantidad-generaciones",  dest="cant_gen", default=1, help="Seleccione cantidad de generaciones")
+parser.add_option("", "--tamaño-poblacion",  dest="tam_pob", default=2, help="Seleccione la cantidad de poblacion")
 
 (opciones, args) = parser.parse_args()
 

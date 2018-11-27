@@ -18,7 +18,7 @@ class Jugar:
                 self.tablero, gane = self.agente1.ganar(self.tablero)
 
                 if gane:
-                    print("Maquina #1 es la ganadora asdasdasd")
+                    print("  Maquina #1 es la ganadora")
                     self.agente1.incrementar_victorias()
          #           flag_tie = True
                     break
@@ -33,7 +33,7 @@ class Jugar:
                     self.tablero.colocar_pieza(fila, columna, 1)
 
                     if self.tablero.movimiento_gane(1):
-                        print("Maquina #1 es la ganadora")
+                        print("  Maquina #1 es la ganadora")
                         break
 
                     
@@ -44,7 +44,7 @@ class Jugar:
                 self.tablero, gane = self.agente2.ganar(self.tablero)
 
                 if gane:
-                    print("Maquina #2 es la ganadora asdasdasdasd")
+                    print("  Maquina #2 es la ganadora ")
                     self.agente2.incrementar_victorias()
           #          flag_tie = True
                     break
@@ -61,14 +61,11 @@ class Jugar:
                     self.tablero.colocar_pieza(fila, columna, 2)
 
                     if self.tablero.movimiento_gane(2):
-                        print("Maquina #2 es la ganadora")
+                        print("  Maquina #2 es la ganadora")
                         break
 
                     
                 self.turn = 1
-        '''if(flag_tie):
-            self.agente1.incrementar_victorias()
-            self.agente2.incrementar_victorias()'''
-        self.tablero.print_tablero()
-        print(" La partida ha finalizado ")
+        #self.tablero.print_tablero()
+        #print(" La partida ha finalizado ")
         return self.agente1, self.agente2

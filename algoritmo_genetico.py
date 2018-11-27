@@ -10,13 +10,14 @@ from copy import deepcopy
 
 class AlgoritmoGenetico:
     poblacion = []
-
+    
     '''Constructor'''
     def __init__(self, tam_poblacion, numero_agentes, numero_generaciones):
         self.poblacion=[]
         self.iniciar_poblacion(tam_poblacion)
         self.num_agentes = numero_agentes
         self.num_gen = numero_generaciones
+        self.resultado = ""
         
     ''' Inicializacion de la poblacion'''
     def iniciar_poblacion(self, tam):
@@ -55,10 +56,27 @@ class AlgoritmoGenetico:
     def generaciones(self):
         for i in range (self.num_gen):
             self.juego_genetico()
+            self.anotar_resultados(i)
             self.cruce_agentes()
+            self.reset_victorias()
         poblacion_ordenada = sorted(self.poblacion, key=lambda objeto: objeto.victorias, reverse=True)
+
+        print(self.resultado)
         print("Mejor configuracion")
         poblacion_ordenada[0].estrategias_to_string()
+
+    def reset_victorias(self):
+        for agente in self.poblacion:
+            agente.set_victorias(0)
+        
+    def anotar_resultados(self, gen):
+        self.resultado+=" == Generacion ==" + str(gen) +"\n"
+        for agente in self.poblacion:
+            config = "              "+str(agente.get_estrategias())+"====== Victorias= "+str(agente.get_victorias())+"\n"
+            self.resultado += config
+        self.resultado+=" ========= \n"
+
+        
     ''' determinacion del ganador'''
     def jugar(self,agente1, agente2):
         
